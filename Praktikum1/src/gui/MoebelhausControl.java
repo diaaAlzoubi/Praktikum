@@ -26,7 +26,7 @@ public class MoebelhausControl {
 	
 	public void nehmeMoebelhausAuf(){
     	try{
-    		this.moebelhausModel.setMoebelhaus(new Moebelhaus(this.moebelhhausView.getTxtName().getText(), Float.parseFloat(this.moebelhhausView.getTxtWohnraum().getText()),Float.parseFloat(this.moebelhhausView.getTxtStil().getText()),this.moebelhhausView.getTxtPreis().getText(),
+    		this.moebelhausModel.setMoebelhaus(new Moebelhaus(this.moebelhhausView.getTxtName().getText(), this.moebelhhausView.getTxtWohnraum().getText(),this.moebelhhausView.getTxtStil().getText(),this.moebelhhausView.getTxtPreis().getText(),
        	    this.moebelhhausView.getTxtMaterialien().getText().split(";")));
     		
     		this.moebelhhausView.zeigeInformationsfensterAn("Das Moebelhaus wurde aufgenommen!");
@@ -35,6 +35,8 @@ public class MoebelhausControl {
        		this.moebelhhausView.zeigeFehlermeldungsfensterAn(exc.getMessage());
      	}
     }
+	
+	
 	public void schreibeBuergeraemterInCsvDatei() {
 		try {
 			moebelhausModel.schreibeBuergeraemterInCsvDatei();
@@ -51,13 +53,12 @@ public class MoebelhausControl {
 	
 	public void leseAusDatei(String typ){
     	try {
-    		if("csv".equals(typ)){
+    		
     		this.moebelhausModel.leseAusDatei(typ);
     		this.moebelhhausView.zeigeInformationsfensterAn("Der Moebelhaus wurden gelesen!");
-      		}
-       		else{
-       			this.moebelhhausView.zeigeInformationsfensterAn("Noch nicht implementiert!");
-	   		}
+      		
+    		
+
 		}
 		catch(IOException exc){
 			this.moebelhhausView.zeigeFehlermeldungsfensterAn("IOException beim Lesen!");

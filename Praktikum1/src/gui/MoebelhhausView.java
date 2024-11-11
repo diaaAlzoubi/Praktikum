@@ -42,9 +42,9 @@ public class MoebelhhausView {
 	    private Label lblEingabe    	 		= new Label("Eingabe");
 	    private Label lblAnzeige   	 	    	= new Label("Anzeige");
 	    private Label lblName 					= new Label("Name:");
-	    private Label lblWohnraum   		= new Label("Geöffnet von:");
-	    private Label lblStil  	 		= new Label("Geöffnet bis:");
-	    private Label lblPreis   			= new Label("Straße und Hausnummer:");
+	    private Label lblWohnraum   		= new Label("Wohnraum:");
+	    private Label lblStil  	 		= new Label("Stil:");
+	    private Label lblPreis   			= new Label("Preis:");
 	    private Label lblMaterialien  		= new Label("Materialien:");
 	    private TextField txtName 	 			= new TextField();
 	    private TextField txtWohnraum		= new TextField();

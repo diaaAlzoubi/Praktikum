@@ -17,15 +17,14 @@ import javafx.stage.Stage;
 import ownUtil.*;
 
 public class BuergeraemterAnwendersystem {
-	  
-    //---Anfang Attribute der grafischen Oberflaeche---
+	//---Anfang Attribute der grafischen Oberflaeche---
     private Pane pane     					= new  Pane();
     private Label lblEingabe    	 		= new Label("Eingabe");
     private Label lblAnzeige   	 	    	= new Label("Anzeige");
     private Label lblName 					= new Label("Name:");
-    private Label lblWohnraum   		= new Label("GeÃ¶ffnet von:");
-    private Label lblStil  	 		= new Label("GeÃ¶ffnet bis:");
-    private Label lblPreis   			= new Label("StraÃŸe und Hausnummer:");
+    private Label lblWohnraum   		= new Label("Geöffnet von:");
+    private Label lblStil  	 		= new Label("Geöffnet bis:");
+    private Label lblPreis   			= new Label("Straße und Hausnummer:");
     private Label lblMaterialien  		= new Label("Materialien:");
     private TextField txtName 	 			= new TextField();
     private TextField txtWohnraum		= new TextField();
@@ -48,7 +47,7 @@ public class BuergeraemterAnwendersystem {
     public BuergeraemterAnwendersystem(Stage primaryStage){
     	Scene scene = new Scene(this.pane, 700, 340);
     	primaryStage.setScene(scene);
-    	primaryStage.setTitle("Verwaltung von BÃ¼rgerÃ¤mtern");
+    	primaryStage.setTitle("Verwaltung von Bürgerämtern");
     	primaryStage.show();
     	this.initKomponenten();
 		this.initListener();
@@ -160,11 +159,11 @@ public class BuergeraemterAnwendersystem {
     	try{
     		this.moebelhaus = new Moebelhaus(
     			txtName.getText(), 
-   	            Float.parseFloat(txtWohnraum.getText()),
-   	            Float.parseFloat(txtStil.getText()),
+   	            txtWohnraum.getText(),
+   	            txtStil.getText(),
     		    txtPreis.getText(),
     		    txtMaterialien.getText().split(";"));
-    		zeigeInformationsfensterAn("Das BÃ¼rgeramt wurde aufgenommen!");
+    		zeigeInformationsfensterAn("Das Bürgeramt wurde aufgenommen!");
        	}
        	catch(Exception exc){
        		zeigeFehlermeldungsfensterAn(exc.getMessage());
@@ -177,7 +176,7 @@ public class BuergeraemterAnwendersystem {
     			this.moebelhaus.gibMoebelhausZurueck(' '));
     	}
     	else{
-    		zeigeInformationsfensterAn("Bisher wurde kein BÃ¼rgeramt aufgenommen!");
+    		zeigeInformationsfensterAn("Bisher wurde kein Bürgeramt aufgenommen!");
     	}
     }    
 		  
@@ -187,12 +186,12 @@ public class BuergeraemterAnwendersystem {
       			BufferedReader ein = new BufferedReader(new FileReader("Buergeraemter.csv"));
       			String[] zeile = ein.readLine().split(";");
       			this.moebelhaus = new Moebelhaus(zeile[0], 
-      				Float.parseFloat(zeile[1]), 
-      				Float.parseFloat(zeile[2]), 
+      				zeile[1], 
+      				zeile[2], 
       				zeile[3], zeile[4].split("_"));
       				ein.close();
       	  			zeigeInformationsfensterAn(
-      	  	   			"Die BÃ¼rgerÃ¤mter wurden gelesen!");
+      	  	   			"Die Bürgerämter wurden gelesen!");
       		}
        		else{
 	   			zeigeInformationsfensterAn(
@@ -216,7 +215,7 @@ public class BuergeraemterAnwendersystem {
 			aus.write(moebelhaus.gibMoebelhausZurueck(';'));
 			aus.close();
    			zeigeInformationsfensterAn(
-	   			"Die BÃ¼rgerÃ¤mter wurden gespeichert!");
+	   			"Die Bürgerämter wurden gespeichert!");
 		}	
 		catch(IOException exc){
 			zeigeFehlermeldungsfensterAn(
