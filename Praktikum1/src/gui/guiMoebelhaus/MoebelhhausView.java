@@ -1,4 +1,4 @@
-package gui;
+package gui.guiMoebelhaus;
 
 import business.MoebelhausModel;
 import javafx.event.ActionEvent;
@@ -17,8 +17,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ownUtil.MeldungsfensterAnzeiger;
+import ownUtil.Observer;
 
-public class MoebelhhausView {
+public class MoebelhhausView implements Observer{
 
 
 	private MoebelhausModel moebelhausModel;
@@ -35,6 +36,7 @@ public class MoebelhhausView {
 	    	primaryStage.show();
 	    	this.initKomponenten();
 			this.initListener();
+			moebelhausModel.addObserver(this);
 	}
 	 
 	 //---Anfang Attribute der grafischen Oberflaeche---
@@ -67,6 +69,7 @@ public class MoebelhhausView {
 	            @Override
 	            public void handle(ActionEvent e) {
 	        	   moebelhausControl.nehmeMoebelhausAuf();
+	        	 moebelhausModel.notifyObservers();
 	            }
 		    });
 		    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
@@ -222,6 +225,11 @@ public class MoebelhhausView {
 
 		public void setTxtMaterialien(TextField txtMaterialien) {
 			this.txtMaterialien = txtMaterialien;
+		}
+
+		@Override
+		public void update() {
+			zeigeBuergeraemterAn();			
 		}
 	    
 }

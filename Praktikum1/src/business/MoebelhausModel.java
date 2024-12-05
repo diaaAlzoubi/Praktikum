@@ -6,17 +6,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Vector;
+import ownUtil.*;
 
 import javafx.scene.control.Alert.AlertType;
-import ownUtil.MeldungsfensterAnzeiger;
 import reader.ConcreteReaderCreator;
 import reader.ReaderCreator;
 import reader.ReaderProduct;
 
-public class MoebelhausModel {
+public class MoebelhausModel implements Observable{
 
 	private Moebelhaus moebelhaus;
+	private static MoebelhausModel instanz;
+	private Vector<Observer> observers=new Vector<Observer>();
 	
+	private MoebelhausModel() {
+		
+	}
+	public static MoebelhausModel getInstanz() {
+		if(instanz==null) {
+			instanz=new MoebelhausModel();
+		}
+		return instanz;
+	}
 	public Moebelhaus getMoebelhaus() {
 		return moebelhaus;
 	}
@@ -43,6 +55,21 @@ public class MoebelhausModel {
   				zeile[1], 
   				zeile[2], 
   				zeile[3], zeile[4].split("_"));
+  			notifyObservers();
   			
     }
+	@Override
+	public void addObserver(Observer obs) {
+		observers.add(obs);
+	}
+	@Override
+	public void removeobersver(Observer obs) {
+		observers.remove(obs);
+	}
+	@Override
+	public void notifyObservers() {
+		for (Observer observer : observers) {
+			observer.update();
+		}
+	}
 }

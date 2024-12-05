@@ -1,4 +1,4 @@
-package gui;
+package gui.guiMoebelhaus;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,7 +19,7 @@ public class MoebelhausControl {
 	
 	public MoebelhausControl(Stage primaryStage) {
 	
-		this.moebelhausModel= new MoebelhausModel();
+		this.moebelhausModel= MoebelhausModel.getInstanz(); ;
 		this.moebelhhausView= new MoebelhhausView(this, primaryStage, moebelhausModel);
 	}
 	
