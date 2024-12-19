@@ -26,7 +26,7 @@ public class MoebelhausControl {
 	
 	public void nehmeMoebelhausAuf(){
     	try{
-    		this.moebelhausModel.setMoebelhaus(new Moebelhaus(this.moebelhhausView.getTxtName().getText(), this.moebelhhausView.getTxtWohnraum().getText(),this.moebelhhausView.getTxtStil().getText(),this.moebelhhausView.getTxtPreis().getText(),
+    		this.moebelhausModel.addMoebelhaus(new Moebelhaus(this.moebelhhausView.getTxtName().getText(), this.moebelhhausView.getTxtWohnraum().getText(),this.moebelhhausView.getTxtStil().getText(),this.moebelhhausView.getTxtPreis().getText(),
        	    this.moebelhhausView.getTxtMaterialien().getText().split(";")));
     		
     		this.moebelhhausView.zeigeInformationsfensterAn("Das Moebelhaus wurde aufgenommen!");
@@ -56,8 +56,6 @@ public class MoebelhausControl {
     		
     		this.moebelhausModel.leseAusDatei(typ);
     		this.moebelhhausView.zeigeInformationsfensterAn("Der Moebelhaus wurden gelesen!");
-      		
-    		
 
 		}
 		catch(IOException exc){

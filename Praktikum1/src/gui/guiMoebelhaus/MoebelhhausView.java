@@ -1,5 +1,6 @@
 package gui.guiMoebelhaus;
 
+import business.Moebelhaus;
 import business.MoebelhausModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -90,18 +91,18 @@ public class MoebelhhausView implements Observer{
 			    	moebelhausControl.leseAusDatei("txt");
 			    }
 	    	});
-		    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					moebelhausControl.schreibeBuergeraemterInCsvDatei();
-				}	
-		    });
+		    
+		    mnItmCsvExport.setOnAction(e->moebelhausControl.schreibeBuergeraemterInCsvDatei());
 	    }
 	    
 	    private void zeigeBuergeraemterAn(){
-	    	if(this.moebelhausModel.getMoebelhaus() != null){
-	    		txtAnzeige.setText(
-	    				this.moebelhausModel.getMoebelhaus().gibMoebelhausZurueck(' '));
+	    	if(this.moebelhausModel.getMoebelhaus().size()> 0){
+	    		StringBuffer text= new StringBuffer();
+	    		for (Moebelhaus moebelhaus: this.moebelhausModel.getMoebelhaus()) {
+	    			text.append(moebelhaus.gibMoebelhausZurueck(' ')+"\n");
+				}
+	    		this.txtAnzeige.setText(text.toString());
+	    	
 	    	}
 	    	else{
 	    		zeigeInformationsfensterAn("Bisher wurde kein Moebelhaus aufgenommen!");

@@ -68,10 +68,14 @@ private MoebelhausModel moebelHausModel;
     }
    
     private void zeigeMoebelAn(){
-    		if(moebelHausModel.getMoebelhaus() != null){
-    			txtAnzeigeMoebel.setText(
-    				moebelHausModel.getMoebelhaus().gibMoebelhausZurueck(' '));
-    		}
+    	if(this.moebelHausModel.getMoebelhaus().size()> 0){
+    		StringBuffer text= new StringBuffer();
+    		for (Moebelhaus moebelhaus: this.moebelHausModel.getMoebelhaus()) {
+    			text.append(moebelhaus.gibMoebelhausZurueck(' ')+"\n");
+			}
+    		this.txtAnzeigeMoebel.setText(text.toString());
+    	
+    	}
     		else{
     			zeigeInformationsfensterAn(
  				"Bisher wurde kein Möbelstück aufgenommen!");

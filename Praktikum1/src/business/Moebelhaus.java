@@ -1,5 +1,7 @@
 package business;
 
+import java.util.ArrayList;
+
 public class Moebelhaus {
 	
 	// Name des Moebelhauses
@@ -10,11 +12,30 @@ public class Moebelhaus {
     // Strasse und Hausnummer des Moebelhauses
     private String preis;
     // Dienstleistungen des Moebelhauses
-    private String[] materialien;
-
-   
+    private ArrayList<String> materialien;
     
+
+	public Moebelhaus(String name, String wohnraum, String stil, String preis, String[] materialien) {
+		super();
+		if(materialien==null) {
+			throw new IllegalArgumentException();
+			}
+		this.name = name;
+		this.wohnraum = wohnraum;
+		this.stil = stil;
+		this.preis = preis;
+		setMaterialienAusStringArray(materialien);
+	}
 	
+	private void setMaterialienAusStringArray(String[] materialien){
+		
+		this.materialien= new ArrayList<String>();
+		for (int i = 0; i < materialien.length; i++) {
+			this.materialien.add(materialien[i]);
+		}
+		
+	}
+    
 	public String getWohnraum() {
 		return wohnraum;
 	}
@@ -45,23 +66,13 @@ public class Moebelhaus {
 	}
 
 
-	public String[] getMaterialien() {
+	public ArrayList<String> getMaterialien() {
 		return materialien;
 	}
 
 
 	public void setMaterialien(String[] materialien) {
-		this.materialien = materialien;
-	}
-
-
-	public Moebelhaus(String name, String wohnraum, String stil, String preis, String[] materialien) {
-		super();
-		this.name = name;
-		this.wohnraum = wohnraum;
-		this.stil = stil;
-		this.preis = preis;
-		this.materialien = materialien;
+		setMaterialien(materialien);
 	}
 
 
@@ -80,10 +91,10 @@ public class Moebelhaus {
 	public String getMaterialienAlsString(char trenner) {
 		String ergebnis = "";
 		int i = 0;
-		for(i = 0; i < this.getMaterialien().length - 1; i++) {
-			ergebnis = ergebnis + this.getMaterialien()[i] + trenner; 
+		for(i = 0; i < this.getMaterialien().size() - 1; i++) {
+			ergebnis = ergebnis + this.getMaterialien().get(i) + trenner; 
 		}
-		return ergebnis	+ this.getMaterialien()[i];
+		return ergebnis	+ this.getMaterialien().get(i);
 	}
 	
 	public String gibMoebelhausZurueck(char trenner){
